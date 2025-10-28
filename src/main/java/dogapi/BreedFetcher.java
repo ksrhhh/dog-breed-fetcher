@@ -1,6 +1,5 @@
 package dogapi;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ public interface BreedFetcher {
      * @return list of sub breeds for the given breed
      * @throws BreedNotFoundException if the breed does not exist
      */
-    List<String> getSubBreeds(String breed) throws BreedNotFoundException, IOException;
+    List<String> getSubBreeds(String breed) throws BreedNotFoundException;
 
     // a class defined in an interface is public AND static
     class BreedNotFoundException extends Exception {
