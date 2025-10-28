@@ -1,5 +1,6 @@
 package dogapi;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -22,20 +23,15 @@ public class CachingBreedFetcher implements BreedFetcher {
         this.cache = new HashMap<>();}
 
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException, IOException {
         if (cache.containsKey(breed)) {
             return cache.get(breed);
         }
 
         callsMade++;
         List<String> subBreeds;
-        try {
-            subBreeds = fetcher.getSubBreeds(breed);
-            cache.put(breed, subBreeds);
-        } catch (BreedNotFoundException e) {
-            throw e;
-        }
-
+        subBreeds = fetcher.getSubBreeds(breed);
+        cache.put(breed, subBreeds);
         return subBreeds;
     }
 
